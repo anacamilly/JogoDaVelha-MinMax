@@ -1,7 +1,15 @@
 html, body {
-    margin: 5%;
+    margin: 4%;
     padding: 0;
     position: fixed;
+  }
+  h1, h2{
+    color: blue;
+    size: 25px;
+  }
+
+  h3{
+    size: 15px
   }
   canvas {
     display: block;
