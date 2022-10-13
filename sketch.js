@@ -1,3 +1,4 @@
+//Estrutura do jogo da velha, que será preencida conforme os jogadores jogam
 let board = [
   ['', '', ''],
   ['', '', ''],
@@ -7,39 +8,44 @@ let board = [
 let w; // = width / 3;
 let h; // = height / 3;
 
+//Jogadores
 let ai = 'X';
 let human = 'O';
-let currentPlayer = human;
+let currentPlayer = human; //Jogador atual
 
+// Criação da tela
 function setup() {
   createCanvas(400, 400);
-  w = width / 3;
-  h = height / 3;
+  w = width / 3; //Largura da tela dividida por 3
+  h = height / 3; //Altura da tela dividida por 3
   bestMove();
 }
 
+//
 function equals3(a, b, c) {
   return a == b && b == c && a != '';
 }
 
+
+// Verifica se há vencedor
 function checkWinner() {
   let winner = null;
 
-  // horizontal
+  // verifica se há vencedor na horizontal
   for (let i = 0; i < 3; i++) {
     if (equals3(board[i][0], board[i][1], board[i][2])) {
       winner = board[i][0];
     }
   }
 
-  // Vertical
+  // verifica se há vencedor vertical
   for (let i = 0; i < 3; i++) {
     if (equals3(board[0][i], board[1][i], board[2][i])) {
       winner = board[0][i];
     }
   }
 
-  // Diagonal
+  // verifica se há vencedor diagonal
   if (equals3(board[0][0], board[1][1], board[2][2])) {
     winner = board[0][0];
   }
@@ -56,6 +62,7 @@ function checkWinner() {
     }
   }
 
+  // Verifica se empatou
   if (winner == null && openSpots == 0) {
     return 'tie';
   } else {
@@ -77,15 +84,18 @@ function mousePressed() {
   }
 }
 
+// Desenha linhas, colunas, X e O 
 function draw() {
   background(255);
   strokeWeight(4);
 
+  // Desenho de linhas e colunas
   line(w, 0, w, height);
   line(w * 2, 0, w * 2, height);
   line(0, h, width, h);
   line(0, h * 2, width, h * 2);
 
+  // Desenho de X e O
   for (let j = 0; j < 3; j++) {
     for (let i = 0; i < 3; i++) {
       let x = w * i + w / 2;
@@ -103,6 +113,7 @@ function draw() {
     }
   }
 
+  // Ganhou, empatou ou perdeu
   let result = checkWinner();
   if (result != null) {
     noLoop();
